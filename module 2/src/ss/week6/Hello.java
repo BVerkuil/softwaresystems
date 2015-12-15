@@ -13,7 +13,7 @@ public class Hello {
 			String answer = in.nextLine();
 			if(answer.equals("")) {
 				result = false;
-				System.exit(0);
+				
 			} else {
 				System.out.println("Hello " + answer);
 			}

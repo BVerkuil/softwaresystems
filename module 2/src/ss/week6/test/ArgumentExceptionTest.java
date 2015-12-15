@@ -40,7 +40,7 @@ public class ArgumentExceptionTest {
      */
     @Test
     public void testArgumentLengthsDifferException() {
-        ArgumentLengthsDifferException exception = new ArgumentLengthsDifferException(2, 3);
+        ArgumentLengthsDifferException exception = new ArgumentLengthsDifferException(	);
         assertTrue(exception instanceof WrongArgumentException);
         assertFalse(exception.getMessage().equals(wrongArgumentException.getMessage()));
     }

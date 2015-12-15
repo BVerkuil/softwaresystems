@@ -1,5 +1,10 @@
 package ss.week6.cards;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class Card
 {
 
@@ -319,5 +324,42 @@ public class Card
 	 */
 	public boolean isInRankBefore(Card card) {
 		return isRankFollowing(this.getRank(), card.getRank());
+	}
+	
+	public void write(PrintWriter writer) {
+		writer.println(this.toString());
+	}
+	
+	public static Card read(BufferedReader in) throws EOFException {
+		
+	}
+	
+	public static void main(String[] args) {
+		Card card1 = new Card(SPADES, ACE);
+		Card card2 = new Card(HEARTS, JACK);
+		Card card3 = new Card(SPADES, ACE);
+		Card card4 = new Card(CLUBS, TEN);
+		
+		try {
+			if(args.length == 0) {
+				PrintWriter systemOut = new PrintWriter(System.out);
+				card1.write(systemOut);
+				card2.write(systemOut);
+				card3.write(systemOut);
+				card4.write(systemOut);
+				systemOut.close();
+			} else {
+				PrintWriter printWriter = new PrintWriter(args[0]);
+				card1.write(printWriter);
+				card2.write(printWriter);
+				card3.write(printWriter);
+				card4.write(printWriter);
+				printWriter.close();
+			}
+
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
 	}
 }
