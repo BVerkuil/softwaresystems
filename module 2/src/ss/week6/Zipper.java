@@ -14,7 +14,7 @@ public class Zipper {
         return result;
     }
     
-    public  String zip2(String s1, String s2) throws Exception {
+    public  String zip2(String s1, String s2) throws TooFewArgumentsException, ArgumentLengthsDifferException {
         
         if((s1 == null || s2 == null)) {
         	throw new TooFewArgumentsException();

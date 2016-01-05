@@ -1,0 +1,4 @@
+Spades ace
+Hearts jack
+Spades ace
+Clubs 10

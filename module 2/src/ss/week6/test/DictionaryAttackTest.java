@@ -21,7 +21,7 @@ public class DictionaryAttackTest {
     private DictionaryAttack dictionaryAttack;
 
     /** Path to the text file */
-    private static final String PATH = ""; //Your path to the test folder
+    private static final String PATH = "src\\ss\\week6\\test\\"; //Your path to the test folder
 
     @Before
     public void setUp() {

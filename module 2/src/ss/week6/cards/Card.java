@@ -1,9 +1,17 @@
 package ss.week6.cards;
 
 import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 
 public class Card
 {
@@ -327,11 +335,63 @@ public class Card
 	}
 	
 	public void write(PrintWriter writer) {
-		writer.println(this.toString());
+		writer.println(toString());
 	}
 	
 	public static Card read(BufferedReader in) throws EOFException {
+		Card card = null;	
+		try {	
+			String sentence = in.readLine();
+			if (sentence != null) {
+				Scanner newScanner = new Scanner(sentence);
+				char suit;
+				char rank;
+				suit = newScanner.hasNext() ? suitString2Char(newScanner.next()) : 'X';
+				rank = newScanner.hasNext() ? rankString2Char(newScanner.next()) : 'X';
+				if (suit != 'X' && rank != 'X') {
+					card = new Card(suit, rank);
+				}
+				newScanner.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return card;
+
+	}
+	
+	public void write(DataOutput writer) throws IOException {
+		writer.writeChar(suit);
+		writer.writeChar(rank);
 		
+	}
+	
+	public static Card read(DataInput in) throws EOFException {
+		Card card = null;	
+		
+		try {
+			char suit = in.readChar();
+			char rank = in.readChar();
+			
+			card = new Card(suit, rank); 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return card;
+	}
+	
+	public void write(ObjectOutput out) throws IOException{
+		out.writeObject(this);
+	}
+	
+	public static Card read(ObjectInput in) throws IOException{
+		Card res = null;
+		try {
+			 res = (Card) in.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	public static void main(String[] args) {
@@ -339,26 +399,18 @@ public class Card
 		Card card2 = new Card(HEARTS, JACK);
 		Card card3 = new Card(SPADES, ACE);
 		Card card4 = new Card(CLUBS, TEN);
-		
+		PrintWriter o;
 		try {
 			if(args.length == 0) {
-				PrintWriter systemOut = new PrintWriter(System.out);
-				card1.write(systemOut);
-				card2.write(systemOut);
-				card3.write(systemOut);
-				card4.write(systemOut);
-				systemOut.close();
+				o = new PrintWriter(System.out);
 			} else {
-				PrintWriter printWriter = new PrintWriter(args[0]);
-				card1.write(printWriter);
-				card2.write(printWriter);
-				card3.write(printWriter);
-				card4.write(printWriter);
-				printWriter.close();
+				 o = new PrintWriter(new FileWriter(args[0]), true);
 			}
-
-			
-		} catch (FileNotFoundException e) {
+			card1.write(o);
+			card2.write(o);
+			card3.write(o);
+			card4.write(o);			
+		} catch (IOException e) {
 			System.out.println("Exception: " + e.getMessage());
 		}
 	}

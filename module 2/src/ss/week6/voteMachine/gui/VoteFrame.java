@@ -62,7 +62,7 @@ public class VoteFrame extends JFrame {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VoteFrame.this.view.getVoteMachine().vote(
+				VoteFrame.this.view.getVoteMachine().addVote(
 						(String) partyChoice.getSelectedItem());
 				partyChoice.setSelectedIndex(0);
 				messageLabel.setText("Make your choice");
