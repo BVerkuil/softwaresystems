@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import ss.week7.cmdline.*;
 
 /**
  * Client class for a simple client-server application
